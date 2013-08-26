@@ -109,8 +109,11 @@ public:
 private:
   typedef std::chrono::high_resolution_clock clock;
 
-  typedef std::map<std::string, Stoper*> StoperContainer;
+  typedef std::string Key;
+  typedef Stoper* OwnPtr;
+  typedef std::map<Key, OwnPtr> StoperContainer;
   typedef StoperContainer::iterator StoperIterator;
+  typedef std::pair<Key, OwnPtr> StoperPair;
 
   bool running;
   clock::time_point begin;

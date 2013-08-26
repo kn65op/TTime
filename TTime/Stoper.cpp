@@ -1,5 +1,7 @@
 #include "Stoper.h"
 
+#include <algorithm>
+
 using namespace TTime;
 using namespace std::chrono;
 
@@ -27,6 +29,10 @@ Stoper::Stoper(void)
 
 Stoper::~Stoper(void)
 {
+  std::for_each(stopers.begin(), stopers.end(), [](StoperPair pair)
+  {
+    delete pair.second;
+  });
 }
 
 void Stoper::start(std::string name, bool from_begining)

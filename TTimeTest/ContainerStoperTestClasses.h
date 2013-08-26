@@ -37,6 +37,11 @@ protected:
     return TTime::Stoper::getTime(name_one);
   }
 
+  void clearStoperOne()
+  {
+    TTime::Stoper::clear(name_one);
+  }
+
   TTime::Stoper::unit getZero()
   {
     return TTime::Stoper::unit::zero();

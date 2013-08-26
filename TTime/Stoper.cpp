@@ -62,12 +62,14 @@ void Stoper::start(std::string name, bool from_beginning)
 
 Stoper::unit Stoper::stop(std::string name)
 {
-  
+  return Stoper::unit::zero();
 }
 
-Stoper:unit Stoper::getTime(std::string name)
+
+
+Stoper::unit Stoper::getTime(std::string name)
 {
-  
+  return Stoper::unit::zero();
 }
 
 void Stoper::start(bool from_beginning)
@@ -75,17 +77,22 @@ void Stoper::start(bool from_beginning)
   
 }
 
-void Stoper::clear()
+Stoper::unit Stoper::clear(std::string name)
 {
-  
+  return Stoper::unit::zero();
 }
 
-Stoper:unit Stoper::stop()
+Stoper::unit Stoper::clear()
 {
-  
+  return Stoper::unit::zero();
+}
+
+Stoper::unit Stoper::stop()
+{
+  return Stoper::unit::zero();
 }
 
 Stoper::unit Stoper::getTime()
 {
-  
+  return Stoper::unit::zero();
 }

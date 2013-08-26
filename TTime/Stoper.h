@@ -87,23 +87,32 @@ public:
    * @return Measured time.
    */
   static unit getTime(std::string name);
+
+  /**
+   * Clear actual time.
+   * If stoper with specified name doesn't existed throws NoExistedStoperException.
+   * @param name Stoper name.
+   * @return Measured time.
+   */
+  static unit clear(std::string name);
   
   /**
-   * Start stoper. Default start is from beginning. If stoper was started it throw StartedStoperException.
+   * Start stoper. Default start is from beginning.
+   * If stoper was started and not stopped it throw StartedStoperException.
    * @param from_beginning Specify if stoper will start from 0 or from stopped time.
    */
-  inline void start(bool from_beginning = true);
+  void start(bool from_beginning = true);
   
   /**
    * Clear actual time. If stoper runs it will stop and set measured time to 0.
    */
-  void clear();
+  unit clear();
   
   /**
    * End stoper. If stoper wasn't started does nothing. IF stoper wasn't started it throw NotStartedStoperException.
    * @return Measured time.
    */
-  inline unit stop();
+  unit stop();
   
   /**
    * Get measured time. If stoper runs it will return actual time.

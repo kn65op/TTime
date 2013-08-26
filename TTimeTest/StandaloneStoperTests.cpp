@@ -72,3 +72,20 @@ TEST_F(StandaloneStoperTest, StopBeforeStart)
 {
   ASSERT_THROW(stoper.stop(), NotStartedStoperException);
 }
+
+TEST_F(StandaloneStoperTest, TestClear)
+{
+  stoper.start();
+  ASSERT_NE(stoper.stop(), getZero());
+  stoper.clear();
+  ASSERT_EQ(stoper.getTime(), getZero());
+}
+
+TEST_F(StandaloneStoperTest, TestClearRunning)
+{
+  stoper.start();
+  ASSERT_NE(stoper.getTime(), getZero());
+  stoper.clear();
+  ASSERT_EQ(stoper.getTime(), getZero());
+  ASSERT_NO_THROW(stoper.start());
+}

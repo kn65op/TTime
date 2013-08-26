@@ -92,3 +92,22 @@ TEST_F(ContainerStoperTest, StopNotStarted)
   stopStoperOne();
   ASSERT_THROW(stopStoperOne(), NotStartedStoperException);
 }
+
+
+TEST_F(ContainerStoperTest, TestClear)
+{
+  startStoperOne();
+  ASSERT_NE(stopStoperOne(), getZero());
+  clearStoperOne();
+  ASSERT_EQ(getTimeStoperOne(), getZero());
+}
+
+TEST_F(ContainerStoperTest, TestClearRunning)
+{
+  startStoperOne();
+  ASSERT_NE(getTimeStoperOne(), getZero());
+  clearStoperOne();
+  ASSERT_EQ(getTimeStoperOne(), getZero());
+  ASSERT_NO_THROW(startStoperOne());
+}
+

@@ -18,5 +18,19 @@
     <ClCompile Include="MainTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StandaloneStoperTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContainerStoperTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StandaloneStoperTestClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContainerStoperTestClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

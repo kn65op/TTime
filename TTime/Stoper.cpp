@@ -5,6 +5,8 @@
 using namespace TTime;
 using namespace std::chrono;
 
+Stoper::StoperContainer Stoper::stopers;
+
 StoperException::StoperException(std::string desription)
 {
   message = desription;
@@ -35,7 +37,7 @@ Stoper::~Stoper(void)
   });
 }
 
-void Stoper::start(std::string name, bool from_begining)
+void Stoper::start(std::string name, bool from_beginning)
 {
   StoperIterator it = stopers.find(name);
   if (it != stopers.end()) //stoper exists
@@ -47,7 +49,7 @@ void Stoper::start(std::string name, bool from_begining)
     }
     else
     {
-      stoper->start(from_begining);
+      stoper->start(from_beginning);
     }
   }
   else //stoper not exists

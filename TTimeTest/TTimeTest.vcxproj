@@ -70,7 +70,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ContainerStoperTests.cpp" />
     <ClCompile Include="MainTest.cpp" />
+    <ClCompile Include="StandaloneStoperTests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ContainerStoperTestClasses.h" />
+    <ClInclude Include="StandaloneStoperTestClasses.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

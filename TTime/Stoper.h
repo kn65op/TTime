@@ -38,6 +38,11 @@ class NotStartedStoperException : public StoperException
   
 };
 
+class StartedStoperException : public StoperException
+{
+  
+};
+
 std::ostream & operator<<(std::ostream & out, StoperException ex);
 
 class Stoper
@@ -60,11 +65,11 @@ public:
    * If stoper with name already exists, but was stopped then can be specified if starts from 0 or continue counting.
    * If name is in use and stoper is running then StoperException will be thrown.
    * @param name Stoper name.
-   * @param from_begining Specify if stoper starts from 0 or continue counting.
+   * @param from_beginning Specify if stoper starts from 0 or continue counting.
    * If stoper wasn't exist it starts from 0 event if specified otherwise.
-   * Default is start from begining.
+   * Default is start from beginning.
    */
-  inline static void start(std::string name, bool from_begining = true);
+  static void start(std::string name, bool from_beginning = true);
 
   /**
    * Stop stoper with specified name
@@ -73,7 +78,7 @@ public:
    * @param name Stoper name.
    * @return Measured time.
    */
-  inline static unit stop(std::string name);
+  static unit stop(std::string name);
   
   /**
    * Get measured time.
@@ -84,10 +89,10 @@ public:
   static unit getTime(std::string name);
   
   /**
-   * Start stoper.
+   * Start stoper. Default start is from beginning. If stoper was started it throw StartedStoperException.
    * @param from_beginning Specify if stoper will start from 0 or from stopped time.
    */
-  inline void start(bool from_beginning);
+  inline void start(bool from_beginning = true);
   
   /**
    * Clear actual time. If stoper runs it will stop and set measured time to 0.
@@ -95,7 +100,7 @@ public:
   void clear();
   
   /**
-   * End stoper. If stoper wasn't started does nothing.
+   * End stoper. If stoper wasn't started does nothing. IF stoper wasn't started it throw NotStartedStoperException.
    * @return Measured time.
    */
   inline unit stop();

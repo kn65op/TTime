@@ -1,6 +1,4 @@
-#include <gtest\gtest.h>
-
-#include <Stoper.h>
+#include "StandaloneStoperTestClasses.h"
 
 int main(int argc, char** argv) 
 { 

@@ -21,7 +21,7 @@ public:
    * Return std::string with exception description.
    * @return Exception description.
    */
-  operator std::string();
+  operator std::string() const;
   
 private:
   std::string message;
@@ -64,7 +64,7 @@ public:
    * If stoper wasn't exist it starts from 0 event if specified otherwise.
    * Default is start from begining.
    */
-  static void start(std::string name, bool from_begining = true);
+  inline static void start(std::string name, bool from_begining = true);
 
   /**
    * Stop stoper with specified name
@@ -73,7 +73,7 @@ public:
    * @param name Stoper name.
    * @return Measured time.
    */
-  static unit stop(std::string name);
+  inline static unit stop(std::string name);
   
   /**
    * Get measured time.
@@ -87,7 +87,7 @@ public:
    * Start stoper.
    * @param from_beginning Specify if stoper will start from 0 or from stopped time.
    */
-  void start(bool from_beginning);
+  inline void start(bool from_beginning);
   
   /**
    * Clear actual time. If stoper runs it will stop and set measured time to 0.
@@ -98,13 +98,13 @@ public:
    * End stoper. If stoper wasn't started does nothing.
    * @return Measured time.
    */
-  unit stop();
+  inline unit stop();
   
   /**
    * Get measured time. If stoper runs it will return actual time.
    * @return Measured time. 
    */
-  long getTime();
+  unit getTime();
 
 private:
   typedef std::chrono::high_resolution_clock clock;

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <chrono>
 
 namespace TTime
 {
@@ -61,7 +62,7 @@ public:
   void clear();
   
   /**
-   * End stoper.
+   * End stoper. If stoper wasn't started does nothing.
    */
   void stop();
   
@@ -71,7 +72,13 @@ public:
    */
   long getTime();
 
-  
+private:
+  typedef std::chrono::high_resolution_clock clock;
+  typedef std::chrono::microseconds unit;
+
+  bool running;
+  clock::time_point begin;
+  unit measured_time;
 };
 
 } //namespace TTime

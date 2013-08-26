@@ -109,11 +109,14 @@ public:
 private:
   typedef std::chrono::high_resolution_clock clock;
 
+  typedef std::map<std::string, Stoper*> StoperContainer;
+  typedef StoperContainer::iterator StoperIterator;
+
   bool running;
   clock::time_point begin;
   unit measured_time;
   
-  std::map<std::string, Stoper*> stopers;
+  static StoperContainer stopers;
 };
 
 } //namespace TTime

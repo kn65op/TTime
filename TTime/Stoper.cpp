@@ -31,5 +31,23 @@ Stoper::~Stoper(void)
 
 void Stoper::start(std::string name, bool from_begining)
 {
-  
+  StoperIterator it = stopers.find(name);
+  if (it != stopers.end()) //stoper exists
+  {
+    Stoper* stoper = it->second;
+    if (stoper->running)
+    {
+      throw StoperException("Stoper " + name + " already defined and is running");
+    }
+    else
+    {
+      stoper->start(from_begining);
+    }
+  }
+  else //stoper not exists
+  {
+    Stoper *stoper = new Stoper();
+    stopers.insert(std::make_pair(name, stoper));
+    stoper->start(true);
+  }
 }

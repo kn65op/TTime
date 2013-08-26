@@ -59,3 +59,33 @@ void Stoper::start(std::string name, bool from_beginning)
     stoper->start(true);
   }
 }
+
+Stoper::unit Stoper::stop(std::string name)
+{
+  
+}
+
+Stoper:unit Stoper::getTime(std::string name)
+{
+  
+}
+
+void Stoper::start(bool from_beginning)
+{
+  
+}
+
+void Stoper::clear()
+{
+  
+}
+
+Stoper:unit Stoper::stop()
+{
+  
+}
+
+Stoper::unit Stoper::getTime()
+{
+  
+}

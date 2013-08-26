@@ -13,7 +13,7 @@ StoperException::operator  std::string() const
   return message;
 }
 
-std::ofstream & operator <<(std::ostream& out, StoperException ex)
+std::ostream & operator <<(std::ostream & out, StoperException ex)
 {
   out << (std::string)ex;
   return out;
@@ -29,4 +29,7 @@ Stoper::~Stoper(void)
 {
 }
 
-void Stop
+void Stoper::start(std::string name, bool from_begining)
+{
+  
+}

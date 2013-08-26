@@ -38,7 +38,7 @@ class NotStartedStoperException : public StoperException
   
 };
 
-std::ofstream & operator<<(std::ostream & out, StoperException ex);
+std::ostream & operator<<(std::ostream & out, StoperException ex);
 
 class Stoper
 {

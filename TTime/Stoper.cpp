@@ -1,5 +1,6 @@
 #include "Stoper.h"
 
+using namespace TTime;
 
 Stoper::Stoper(void)
 {

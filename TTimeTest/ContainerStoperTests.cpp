@@ -12,6 +12,17 @@ TEST_F(ContainerStoperTest, DifferentStopers)
   ASSERT_NO_THROW(startStoperThree());
 }
 
+TEST_F(ContainerStoperTest, ClearStopers)
+{
+  ASSERT_NO_THROW(startStoperOne());
+  ASSERT_NO_THROW(startStoperTwo());
+  ASSERT_NO_THROW(startStoperThree());
+  Stoper::clearStopers();
+  ASSERT_NO_THROW(startStoperOne());
+  ASSERT_NO_THROW(startStoperTwo());
+  ASSERT_NO_THROW(startStoperThree());
+}
+
 TEST_F(ContainerStoperTest, SameStopers)
 {
   ASSERT_NO_THROW(startStoperOne());

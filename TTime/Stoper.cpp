@@ -5,7 +5,7 @@
 using namespace TTime;
 using namespace std::chrono;
 
-Stoper::StoperContainer Stoper::stopers;
+Stoper::StoperContainer Stoper::stopers = Stoper::StoperContainer();
 
 StoperException::StoperException(std::string desription)
 {
@@ -30,6 +30,11 @@ Stoper::Stoper(void)
 
 
 Stoper::~Stoper(void)
+{
+  
+}
+
+void Stoper::clearStopers()
 {
   std::for_each(stopers.begin(), stopers.end(), [](StoperPair pair)
   {
@@ -62,7 +67,15 @@ void Stoper::start(std::string name, bool from_beginning)
 
 Stoper::unit Stoper::stop(std::string name)
 {
-  return Stoper::unit::zero();
+  StoperIterator it = stopers.find(name);
+  if (it != stopers.end()) //stoper exists
+  {
+    return it->second->stop(); //TODO:
+  }
+  else
+  {
+    throw NotExistStoperException("Stoper named " + name + " does not exist");
+  }
 }
 
 

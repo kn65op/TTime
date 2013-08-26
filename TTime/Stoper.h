@@ -30,17 +30,26 @@ private:
 
 class NotExistStoperException : public StoperException
 {
-  
+public:
+  NotExistStoperException(std::string d) : StoperException(d)
+  {
+  }
 };
 
 class NotStartedStoperException : public StoperException
 {
-  
+public:
+  NotStartedStoperException(std::string d) : StoperException(d)
+  {
+  }
 };
 
 class StartedStoperException : public StoperException
 {
-  
+public:
+  StartedStoperException(std::string d) : StoperException(d)
+  {
+  }
 };
 
 std::ostream & operator<<(std::ostream & out, StoperException ex);
@@ -70,6 +79,11 @@ public:
    * Default is start from beginning.
    */
   static void start(std::string name, bool from_beginning = true);
+
+  /**
+   * Clear exitsing stopers without exceptions
+   */
+  static void clearStopers();
 
   /**
    * Stop stoper with specified name

@@ -5,6 +5,7 @@ using namespace std::chrono;
 
 Stoper::Stoper(void)
 {
+  measured_time = unit::zero();
 }
 
 

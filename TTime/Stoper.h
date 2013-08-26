@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <chrono>
+#include <map>
 
 namespace TTime
 {
@@ -27,11 +28,22 @@ private:
   
 };
 
+class NotExistStoperException : public StoperException
+{
+  
+};
+
+class NotStartedStoperException : public StoperException
+{
+  
+};
+
 std::ofstream & operator<<(std::ostream & out, StoperException ex);
 
 class Stoper
 {
 public:
+  typedef std::chrono::microseconds unit;
   /**
    * Default constructor. Creates simple stoper.
    */
@@ -44,11 +56,32 @@ public:
 
   /**
    * Start stoper with specified name. 
-   * Name has to be unique. It is forbidden to start stoper, which has name that was already used.
-   * If name is in use StoperException will be thrown.
+   * Name has to be unique. It is forbidden to start stoper which runs nad has name that was already used.
+   * If stoper with name already exists, but was stopped then can be specified if starts from 0 or continue counting.
+   * If name is in use and stoper is running then StoperException will be thrown.
    * @param name Stoper name.
+   * @param from_begining Specify if stoper starts from 0 or continue counting.
+   * If stoper wasn't exist it starts from 0 event if specified otherwise.
+   * Default is start from begining.
    */
-  static void start(std::string name);
+  static void start(std::string name, bool from_begining = true);
+
+  /**
+   * Stop stoper with specified name
+   * If stoper with specified name doesn't existed throws NoExistedStoperException.
+   * If stoper with specified name doesn't started throws NotStartedStoperException.
+   * @param name Stoper name.
+   * @return Measured time.
+   */
+  static unit stop(std::string name);
+  
+  /**
+   * Get measured time.
+   * If stoper with specified name doesn't existed throws NoExistedStoperException.
+   * @param name Stoper name.
+   * @return Measured time.
+   */
+  static unit getTime(std::string name);
   
   /**
    * Start stoper.
@@ -63,8 +96,9 @@ public:
   
   /**
    * End stoper. If stoper wasn't started does nothing.
+   * @return Measured time.
    */
-  void stop();
+  unit stop();
   
   /**
    * Get measured time. If stoper runs it will return actual time.
@@ -74,11 +108,12 @@ public:
 
 private:
   typedef std::chrono::high_resolution_clock clock;
-  typedef std::chrono::microseconds unit;
 
   bool running;
   clock::time_point begin;
   unit measured_time;
+  
+  std::map<std::string, Stoper*> stopers;
 };
 
 } //namespace TTime

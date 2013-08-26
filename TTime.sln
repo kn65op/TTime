@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TTime", "TTime\TTime.vcxproj", "{2889B041-DA47-4E5E-BA42-DA596D8785EC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TTimeTest", "TTimeTest\TTimeTest.vcxproj", "{9A6C754D-D306-42DF-9C82-A161580FAC78}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2889B041-DA47-4E5E-BA42-DA596D8785EC} = {2889B041-DA47-4E5E-BA42-DA596D8785EC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

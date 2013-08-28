@@ -12,6 +12,11 @@ protected:
     name_three = "asd";
   }
 
+  ~ContainerStoperTest()
+  {
+    TTime::Stoper::clearStopers();
+  }
+
   void startStoperOne(bool fb = true)
   {
     TTime::Stoper::start(name_one, fb);

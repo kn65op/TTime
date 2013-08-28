@@ -41,6 +41,7 @@ void Stoper::clearStopers()
   {
     delete pair.second;
   });
+  stopers.clear();
 }
 
 void Stoper::start(std::string name, bool from_beginning)
@@ -48,14 +49,7 @@ void Stoper::start(std::string name, bool from_beginning)
   Stoper * stoper = findStoper(name, false);
   if (stoper) //stoper exists
   {
-    if (stoper->running)
-    {
-      throw StoperException("Stoper " + name + " already defined and is running");
-    }
-    else
-    {
-      stoper->start(from_beginning);
-    }
+    stoper->start(from_beginning);
   }
   else //stoper not exists
   {

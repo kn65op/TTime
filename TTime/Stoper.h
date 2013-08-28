@@ -72,7 +72,7 @@ public:
    * Start stoper with specified name. 
    * Name has to be unique. It is forbidden to start stoper which runs nad has name that was already used.
    * If stoper with name already exists, but was stopped then can be specified if starts from 0 or continue counting.
-   * If name is in use and stoper is running then StoperException will be thrown.
+   * If name is in use and stoper is running then StartedStoperException will be thrown.
    * @param name Stoper name.
    * @param from_beginning Specify if stoper starts from 0 or continue counting.
    * If stoper wasn't exist it starts from 0 event if specified otherwise.

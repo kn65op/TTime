@@ -111,14 +111,15 @@ Stoper::unit Stoper::stop()
   {
     throw NotStartedStoperException("Stoper didn't start");
   }
-  return measured_time = calculateDiffernce(clock::now(), begin);
+  running = false;
+  return measured_time += calculateDiffernce(clock::now(), begin);
 }
 
 Stoper::unit Stoper::getTime()
 {
   if (running)
   {
-    return calculateDiffernce(clock::now(), begin);
+    return calculateDiffernce(clock::now(), begin) + measured_time;
   }
   else
   {
@@ -146,7 +147,7 @@ Stoper* Stoper::findStoper(std::string name, bool throw_exception)
   }
 }
 
-Stoper::unit Stoper::calculateDiffernce(clock::time_point & begin, clock::time_point & end)
+Stoper::unit Stoper::calculateDiffernce(clock::time_point & end, clock::time_point & begin)
 {
   return duration_cast<microseconds>(end - begin).count();
 }

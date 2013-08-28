@@ -30,6 +30,7 @@ TEST_F(StandaloneStoperTest, BiggerAfterRestart)
   std::this_thread::sleep_for(std::chrono::milliseconds(2));
   Stoper::unit end1 = stoper.stop();
   stoper.start(false);
+  std::this_thread::sleep_for(std::chrono::milliseconds(1));
   ASSERT_GT(stoper.stop(), end1);
 }
 

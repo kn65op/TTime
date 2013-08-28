@@ -115,7 +115,7 @@ public:
    * If stoper was started and not stopped it throw StartedStoperException.
    * @param from_beginning Specify if stoper will start from 0 or from stopped time.
    */
-  void start(bool from_beginning = true);
+  void start(bool from_beginning = true); 
   
   /**
    * Clear actual time. If stoper runs it will stop and set measured time to 0.

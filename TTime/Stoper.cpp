@@ -25,7 +25,8 @@ std::ostream & operator <<(std::ostream & out, StoperException ex)
 
 Stoper::Stoper(void)
 {
-  measured_time = unit::zero();
+  measured_time = 0;
+  running = false;
 }
 
 
@@ -44,10 +45,9 @@ void Stoper::clearStopers()
 
 void Stoper::start(std::string name, bool from_beginning)
 {
-  StoperIterator it = stopers.find(name);
-  if (it != stopers.end()) //stoper exists
+  Stoper * stoper = findStoper(name, false);
+  if (stoper) //stoper exists
   {
-    Stoper* stoper = it->second;
     if (stoper->running)
     {
       throw StoperException("Stoper " + name + " already defined and is running");
@@ -67,45 +67,86 @@ void Stoper::start(std::string name, bool from_beginning)
 
 Stoper::unit Stoper::stop(std::string name)
 {
-  StoperIterator it = stopers.find(name);
-  if (it != stopers.end()) //stoper exists
-  {
-    return it->second->stop(); //TODO:
-  }
-  else
-  {
-    throw NotExistStoperException("Stoper named " + name + " does not exist");
-  }
+  return findStoper(name)->stop();
 }
 
 
 
 Stoper::unit Stoper::getTime(std::string name)
 {
-  return Stoper::unit::zero();
+  return findStoper(name)->getTime();
 }
 
 void Stoper::start(bool from_beginning)
 {
-  
+  if (running)
+  {
+    throw StartedStoperException("Stoper is already started");
+  }
+  if (from_beginning)
+  {
+    measured_time = 0;
+  }
+  running = true;
+  begin = clock::now();
 }
 
 Stoper::unit Stoper::clear(std::string name)
 {
-  return Stoper::unit::zero();
+  return findStoper(name)->clear();
 }
 
 Stoper::unit Stoper::clear()
 {
-  return Stoper::unit::zero();
+  Stoper::unit tmp;
+  tmp = calculateDiffernce(clock::now(), begin);
+  running = false;
+  measured_time = 0;
+  return tmp;
 }
 
 Stoper::unit Stoper::stop()
 {
-  return Stoper::unit::zero();
+  if (!running)
+  {
+    throw NotStartedStoperException("Stoper didn't start");
+  }
+  return measured_time = calculateDiffernce(clock::now(), begin);
 }
 
 Stoper::unit Stoper::getTime()
 {
-  return Stoper::unit::zero();
+  if (running)
+  {
+    return calculateDiffernce(clock::now(), begin);
+  }
+  else
+  {
+    return measured_time;
+  }
+}
+
+Stoper* Stoper::findStoper(std::string name, bool throw_exception)
+{
+  StoperIterator it = stopers.find(name);
+  if (it != stopers.end()) //stoper exists
+  {
+    return it->second; //TODO:
+  }
+  else
+  {
+    if (throw_exception)
+    {
+      throw NotExistStoperException("Stoper named " + name + " does not exist");
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
+}
+
+Stoper::unit Stoper::calculateDiffernce(clock::time_point & begin, clock::time_point & end)
+{
+  return duration_cast<microseconds>(end - begin).count();
 }

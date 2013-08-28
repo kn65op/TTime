@@ -12,7 +12,7 @@ protected:
 
   TTime::Stoper::unit getZero()
   {
-    return TTime::Stoper::unit::zero();
+    return 0;
   }
 
   TTime::Stoper stoper;

@@ -57,7 +57,7 @@ std::ostream & operator<<(std::ostream & out, StoperException ex);
 class Stoper
 {
 public:
-  typedef std::chrono::microseconds unit;
+  typedef long long unit;
   /**
    * Default constructor. Creates simple stoper.
    */
@@ -119,11 +119,12 @@ public:
   
   /**
    * Clear actual time. If stoper runs it will stop and set measured time to 0.
+   * @return Measured time.
    */
   unit clear();
   
   /**
-   * End stoper. If stoper wasn't started does nothing. IF stoper wasn't started it throw NotStartedStoperException.
+   * End stoper. If stoper wasn't started it throw NotStartedStoperException.
    * @return Measured time.
    */
   unit stop();
@@ -148,6 +149,9 @@ private:
   unit measured_time;
   
   static StoperContainer stopers;
+  static Stoper* findStoper(std::string name, bool throw_exception = true);
+
+  unit calculateDiffernce(clock::time_point & begin, clock::time_point & end);
 };
 
 } //namespace TTime

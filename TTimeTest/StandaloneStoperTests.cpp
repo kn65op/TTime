@@ -13,18 +13,21 @@ TEST_F(StandaloneStoperTest, ZeroBeforeStart)
 TEST_F(StandaloneStoperTest, NonZeroAfterStart)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_NE(stoper.getTime(), getZero());
 }
 
 TEST_F(StandaloneStoperTest, NonZeroAfterStartStop)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_NE(stoper.stop(), getZero());
 }
 
 TEST_F(StandaloneStoperTest, BiggerAfterRestart)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   Stoper::unit end1 = stoper.stop();
   stoper.start(false);
   ASSERT_GT(stoper.stop(), end1);
@@ -33,33 +36,39 @@ TEST_F(StandaloneStoperTest, BiggerAfterRestart)
 TEST_F(StandaloneStoperTest, LessAfterRestartFromBeginning)
 {
   stoper.start();
-  std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+  std::this_thread::sleep_for(std::chrono::milliseconds(20));
   Stoper::unit end1 = stoper.stop();
   stoper.start(true);
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_LT(stoper.stop(), end1);
 }
 
 TEST_F(StandaloneStoperTest, LessAfterRestartFromBeginningDefault)
 {
   stoper.start();
-  std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+  std::this_thread::sleep_for(std::chrono::milliseconds(20));
   Stoper::unit end1 = stoper.stop();
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_LT(stoper.stop(), end1);
 }
 
 TEST_F(StandaloneStoperTest, GetTimeBeforeStop)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   Stoper::unit end1 = stoper.getTime();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_GT(stoper.stop(), end1);
 }
 
 TEST_F(StandaloneStoperTest, GetTimeAfterStop)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   Stoper::unit end1 = stoper.stop();
-  ASSERT_EQ(stoper.stop(), end1);
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
+  ASSERT_EQ(stoper.getTime(), end1);
 }
 
 TEST_F(StandaloneStoperTest, StartAfterStart)
@@ -76,16 +85,24 @@ TEST_F(StandaloneStoperTest, StopBeforeStart)
 TEST_F(StandaloneStoperTest, TestClear)
 {
   stoper.start();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
   ASSERT_NE(stoper.stop(), getZero());
-  stoper.clear();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
+  ASSERT_NE(stoper.clear(), getZero());
   ASSERT_EQ(stoper.getTime(), getZero());
 }
 
 TEST_F(StandaloneStoperTest, TestClearRunning)
 {
   stoper.start();
-  ASSERT_NE(stoper.getTime(), getZero());
-  stoper.clear();
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
+  Stoper::unit get, clear;
+  get = stoper.getTime();
+  ASSERT_NE(get, getZero());
+  std::this_thread::sleep_for(std::chrono::milliseconds(2));
+  clear = stoper.clear();
+  ASSERT_NE(clear, getZero());
+  ASSERT_NE(get, clear);
   ASSERT_EQ(stoper.getTime(), getZero());
   ASSERT_NO_THROW(stoper.start());
 }

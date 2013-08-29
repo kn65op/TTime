@@ -6,6 +6,7 @@ using namespace TTime;
 using namespace std::chrono;
 
 Stoper::StoperContainer Stoper::stopers = Stoper::StoperContainer();
+std::string Stoper::unit_name = "ms"; //connecteed with time_unit
 
 StoperException::StoperException(std::string desription)
 {
@@ -143,5 +144,10 @@ Stoper* Stoper::findStoper(std::string name, bool throw_exception)
 
 Stoper::unit Stoper::calculateDiffernce(clock::time_point & end, clock::time_point & begin)
 {
-  return duration_cast<microseconds>(end - begin).count();
+  return duration_cast<time_unit>(end - begin).count();
+}
+
+std::string Stoper::getUnitName()
+{
+  return unit_name;
 }

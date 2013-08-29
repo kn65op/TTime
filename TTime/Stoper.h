@@ -135,6 +135,8 @@ public:
    */
   unit getTime();
 
+  static std::string getUnitName();
+
 private:
   typedef std::chrono::high_resolution_clock clock;
 
@@ -143,6 +145,7 @@ private:
   typedef std::map<Key, OwnPtr> StoperContainer;
   typedef StoperContainer::iterator StoperIterator;
   typedef std::pair<Key, OwnPtr> StoperPair;
+  typedef std::chrono::milliseconds time_unit; //connecteed with unit_name
 
   bool running;
   clock::time_point begin;
@@ -150,6 +153,7 @@ private:
   
   static StoperContainer stopers;
   static Stoper* findStoper(std::string name, bool throw_exception = true);
+  static std::string unit_name; //connecteed with time_unit
 
   unit calculateDiffernce(clock::time_point & begin, clock::time_point & end);
 };

@@ -52,7 +52,7 @@ public:
   }
 };
 
-std::ostream & operator<<(std::ostream & out, StoperException ex);
+std::ostream & operator<<(std::ostream & out, StoperException & ex);
 
 class Stoper
 {

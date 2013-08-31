@@ -18,7 +18,7 @@ StoperException::operator  std::string() const
   return message;
 }
 
-std::ostream & operator <<(std::ostream & out, StoperException ex)
+std::ostream & operator<<(std::ostream & out, StoperException & ex)
 {
   out << (std::string)ex;
   return out;
